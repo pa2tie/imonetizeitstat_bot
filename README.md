@@ -17,6 +17,7 @@ How install:
 <br>IMON_PASSWORD = imonetizeit authorization password
 <br>TG_TOKEN = api token your telegram bot
 <br>CHAT_ID = chat id in telegram, where bot will drop lins
+<br>TZ = your Time Zone, example: Europe/Moscow (view all zones https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
 5. Scroll down and click "Add buildpacks", insert this links
 <br>https://github.com/heroku/heroku-buildpack-nodejs.git
 <br>https://github.com/jontewks/puppeteer-heroku-buildpack
