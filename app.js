@@ -25,26 +25,33 @@ process.on('uncaughtException', function (err) {
 var dateToday = new Date();
 var yearToday = dateToday.getFullYear();
 var monthToday = dateToday.getMonth() + 1;
-monthToday = (monthToday < 10 ? "0" : "") + monthToday;
+    monthToday = (monthToday < 10 ? "0" : "") + monthToday;
 var dayToday  = dateToday.getDate();
-dayToday = (dayToday < 10 ? "0" : "") + dayToday;
+    dayToday = (dayToday < 10 ? "0" : "") + dayToday;
 
 var dateYesterday = new Date();
-dateYesterday.setDate(dateToday.getDate() - 1);
+    dateYesterday.setDate(dateToday.getDate() - 1);
 var yearYesterday = dateYesterday.getFullYear();
 var monthYesterday = dateYesterday.getMonth() + 1;
-monthYesterday = (monthYesterday < 10 ? "0" : "") + monthYesterday;
+    monthYesterday = (monthYesterday < 10 ? "0" : "") + monthYesterday;
 var dayYesterday  = dateYesterday.getDate();
-dayYesterday = (dayYesterday < 10 ? "0" : "") + dayYesterday;
+    dayYesterday = (dayYesterday < 10 ? "0" : "") + dayYesterday;
 
 
-var urlToday = `https://imonetizeit.com/partner/statistics/get?type=csv&is_offer=0&filter%5BcampaignId%5D=all&filter%5Bvertical%5D=0&filter%5Butc%5D=%2B00%3A00&filter%5BdateFrom%5D=${yearToday}-${monthToday}-${dayToday}&filter%5BdateTo%5D=${yearToday}-${monthToday}-${dayToday}&filter%5BgroupBy%5D=total&filter%5BsubId1%5D=0&filter%5BsubId2%5D=0&filter%5BshowGraph%5D=0&filter%5Binclude_archive%5D=1&filter%5Bcreative%5D=0&filter%5Bmain%5D%5B%5D=campaign_name&filter%5Bmain%5D%5B%5D=country_iso3&filter%5Btab%5D=campaign_name`;
-var urlYesterday = `https://imonetizeit.com/partner/statistics/get?type=csv&is_offer=0&filter%5BcampaignId%5D=all&filter%5Bvertical%5D=0&filter%5Butc%5D=%2B00%3A00&filter%5BdateFrom%5D=${yearYesterday}-${monthYesterday}-${dayYesterday}&filter%5BdateTo%5D=${yearYesterday}-${monthYesterday}-${dayYesterday}&filter%5BgroupBy%5D=total&filter%5BsubId1%5D=0&filter%5BsubId2%5D=0&filter%5BshowGraph%5D=0&filter%5Binclude_archive%5D=1&filter%5Bcreative%5D=0&filter%5Bmain%5D%5B%5D=campaign_name&filter%5Bmain%5D%5B%5D=country_iso3&filter%5Btab%5D=campaign_name`;
+var urlTodayGeo = `https://imonetizeit.com/partner/statistics/get?type=csv&is_offer=0&filter%5BcampaignId%5D=all&filter%5Bvertical%5D=0&filter%5Butc%5D=%2B00%3A00&filter%5BdateFrom%5D=${yearToday}-${monthToday}-${dayToday}&filter%5BdateTo%5D=${yearToday}-${monthToday}-${dayToday}&filter%5BgroupBy%5D=total&filter%5BsubId1%5D=0&filter%5BsubId2%5D=0&filter%5BshowGraph%5D=0&filter%5Binclude_archive%5D=0&filter%5Bcreative%5D=0&filter%5Bmain%5D%5B%5D=campaign_name&filter%5Bmain%5D%5B%5D=country_iso3&filter%5Btab%5D=campaign_name`;
+var urlYesterdayGeo = `https://imonetizeit.com/partner/statistics/get?type=csv&is_offer=0&filter%5BcampaignId%5D=all&filter%5Bvertical%5D=0&filter%5Butc%5D=%2B00%3A00&filter%5BdateFrom%5D=${yearYesterday}-${monthYesterday}-${dayYesterday}&filter%5BdateTo%5D=${yearYesterday}-${monthYesterday}-${dayYesterday}&filter%5BgroupBy%5D=total&filter%5BsubId1%5D=0&filter%5BsubId2%5D=0&filter%5BshowGraph%5D=0&filter%5Binclude_archive%5D=0&filter%5Bcreative%5D=0&filter%5Bmain%5D%5B%5D=campaign_name&filter%5Bmain%5D%5B%5D=country_iso3&filter%5Btab%5D=campaign_name`;
+var urlToday = `https://imonetizeit.com/partner/statistics/get?type=csv&is_offer=0&filter%5BcampaignId%5D=all&filter%5Bvertical%5D=0&filter%5Butc%5D=%2B00%3A00&filter%5BdateFrom%5D=${yearToday}-${monthToday}-${dayToday}&filter%5BdateTo%5D=${yearToday}-${monthToday}-${dayToday}&filter%5BgroupBy%5D=total&filter%5BsubId1%5D=0&filter%5BsubId2%5D=0&filter%5BshowGraph%5D=0&filter%5Binclude_archive%5D=0&filter%5Bcreative%5D=0&filter%5Bmain%5D%5B%5D=campaign_name&filter%5Btab%5D=campaign_name`;
+var urlYesterday = `https://imonetizeit.com/partner/statistics/get?type=csv&is_offer=0&filter%5BcampaignId%5D=all&filter%5Bvertical%5D=0&filter%5Butc%5D=%2B00%3A00&filter%5BdateFrom%5D=${yearYesterday}-${monthYesterday}-${dayYesterday}&filter%5BdateTo%5D=${yearYesterday}-${monthYesterday}-${dayYesterday}&filter%5BgroupBy%5D=total&filter%5BsubId1%5D=0&filter%5BsubId2%5D=0&filter%5BshowGraph%5D=0&filter%5Binclude_archive%5D=0&filter%5Bcreative%5D=0&filter%5Bmain%5D%5B%5D=campaign_name&filter%5Btab%5D=campaign_name`;
+
+var zohoTodayGeo;
 var zohoToday;
+var zohoYesterdayGeo;
 var zohoYesterday;
 var msgID = "";
 
 var checkToday = false;
+var checkTodayGeo = false;
+var checkYesterdayGeo = false;
 var checkYesterday = false;
 
 new CronJob('0 */30 * * * *', function() { // Every 30 min
@@ -70,25 +77,45 @@ new CronJob('0 */30 * * * *', function() { // Every 30 min
               dayYesterday  = dateYesterday.getDate();
               dayYesterday = (dayYesterday < 10 ? "0" : "") + dayYesterday;
 
-              urlToday = `https://imonetizeit.com/partner/statistics/get?type=csv&is_offer=0&filter%5BcampaignId%5D=all&filter%5Bvertical%5D=0&filter%5Butc%5D=%2B00%3A00&filter%5BdateFrom%5D=${yearToday}-${monthToday}-${dayToday}&filter%5BdateTo%5D=${yearToday}-${monthToday}-${dayToday}&filter%5BgroupBy%5D=total&filter%5BsubId1%5D=0&filter%5BsubId2%5D=0&filter%5BshowGraph%5D=0&filter%5Binclude_archive%5D=1&filter%5Bcreative%5D=0&filter%5Bmain%5D%5B%5D=campaign_name&filter%5Bmain%5D%5B%5D=country_iso3&filter%5Btab%5D=campaign_name`;
-              urlYesterday = `https://imonetizeit.com/partner/statistics/get?type=csv&is_offer=0&filter%5BcampaignId%5D=all&filter%5Bvertical%5D=0&filter%5Butc%5D=%2B00%3A00&filter%5BdateFrom%5D=${yearYesterday}-${monthYesterday}-${dayYesterday}&filter%5BdateTo%5D=${yearYesterday}-${monthYesterday}-${dayYesterday}&filter%5BgroupBy%5D=total&filter%5BsubId1%5D=0&filter%5BsubId2%5D=0&filter%5BshowGraph%5D=0&filter%5Binclude_archive%5D=1&filter%5Bcreative%5D=0&filter%5Bmain%5D%5B%5D=campaign_name&filter%5Bmain%5D%5B%5D=country_iso3&filter%5Btab%5D=campaign_name`;
+              urlTodayGeo = `https://imonetizeit.com/partner/statistics/get?type=csv&is_offer=0&filter%5BcampaignId%5D=all&filter%5Bvertical%5D=0&filter%5Butc%5D=%2B00%3A00&filter%5BdateFrom%5D=${yearToday}-${monthToday}-${dayToday}&filter%5BdateTo%5D=${yearToday}-${monthToday}-${dayToday}&filter%5BgroupBy%5D=total&filter%5BsubId1%5D=0&filter%5BsubId2%5D=0&filter%5BshowGraph%5D=0&filter%5Binclude_archive%5D=1&filter%5Bcreative%5D=0&filter%5Bmain%5D%5B%5D=campaign_name&filter%5Bmain%5D%5B%5D=country_iso3&filter%5Btab%5D=campaign_name`;
+              urlYesterdayGeo = `https://imonetizeit.com/partner/statistics/get?type=csv&is_offer=0&filter%5BcampaignId%5D=all&filter%5Bvertical%5D=0&filter%5Butc%5D=%2B00%3A00&filter%5BdateFrom%5D=${yearYesterday}-${monthYesterday}-${dayYesterday}&filter%5BdateTo%5D=${yearYesterday}-${monthYesterday}-${dayYesterday}&filter%5BgroupBy%5D=total&filter%5BsubId1%5D=0&filter%5BsubId2%5D=0&filter%5BshowGraph%5D=0&filter%5Binclude_archive%5D=1&filter%5Bcreative%5D=0&filter%5Bmain%5D%5B%5D=campaign_name&filter%5Bmain%5D%5B%5D=country_iso3&filter%5Btab%5D=campaign_name`;
+              urlToday = `https://imonetizeit.com/partner/statistics/get?type=csv&is_offer=0&filter%5BcampaignId%5D=all&filter%5Bvertical%5D=0&filter%5Butc%5D=%2B00%3A00&filter%5BdateFrom%5D=${yearToday}-${monthToday}-${dayToday}&filter%5BdateTo%5D=${yearToday}-${monthToday}-${dayToday}&filter%5BgroupBy%5D=total&filter%5BsubId1%5D=0&filter%5BsubId2%5D=0&filter%5BshowGraph%5D=0&filter%5Binclude_archive%5D=0&filter%5Bcreative%5D=0&filter%5Bmain%5D%5B%5D=campaign_name&filter%5Btab%5D=campaign_name`;
+              urlYesterday = `https://imonetizeit.com/partner/statistics/get?type=csv&is_offer=0&filter%5BcampaignId%5D=all&filter%5Bvertical%5D=0&filter%5Butc%5D=%2B00%3A00&filter%5BdateFrom%5D=${yearYesterday}-${monthYesterday}-${dayYesterday}&filter%5BdateTo%5D=${yearYesterday}-${monthYesterday}-${dayYesterday}&filter%5BgroupBy%5D=total&filter%5BsubId1%5D=0&filter%5BsubId2%5D=0&filter%5BshowGraph%5D=0&filter%5Binclude_archive%5D=0&filter%5Bcreative%5D=0&filter%5Bmain%5D%5B%5D=campaign_name&filter%5Btab%5D=campaign_name`;
 
               callback(null);
             },
             function(callback) { // get cookies
               getCookies(function(check) { 
+                checkTodayGeo = check;
                 checkToday = check;
+                checkYesterdayGeo = check;
                 checkYesterday = check;
                 callback(null);
               });
             },
-      			function(callback) { // Download today stat
+      			function(callback) { // Download today stat (GEO)
+              var fileName = 'imi_stats_export_geo_today.csv';
+              downloadFile(fileName, urlTodayGeo, function(check) { 
+                checkTodayGeo = check;
+                callback(null);
+              });
+            },
+            function(callback) { // Download today stat
       				var fileName = 'imi_stats_export_today.csv';
       				downloadFile(fileName, urlToday, function(check) { 
                 checkToday = check;
                 callback(null);
               });
       			},
+            function(callback) { // Download yesterday stat (GEO)
+
+              var fileName = 'imi_stats_export_geo_yesterday.csv';
+              downloadFile(fileName, urlYesterdayGeo, function(check) { 
+                checkYesterdayGeo = check;
+                callback(null);
+              });
+
+            },
             function(callback) { // Download yesterday stat
 
               var fileName = 'imi_stats_export_yesterday.csv';
@@ -98,7 +125,15 @@ new CronJob('0 */30 * * * *', function() { // Every 30 min
               });
 
             },
-      			function(callback) { // Upload today stat
+      			function(callback) { // Upload today stat (GEO)
+              var fileName = 'imi_stats_export_geo_today.csv';
+              uploadZoho(dayToday, monthToday, yearToday, fileName, function(check, zoho) {
+                checkTodayGeo = check;
+                zohoTodayGeo = zoho;
+                callback(null);
+              });
+            },
+            function(callback) { // Upload today stat
       				var fileName = 'imi_stats_export_today.csv';
       				uploadZoho(dayToday, monthToday, yearToday, fileName, function(check, zoho) {
                 checkToday = check;
@@ -106,6 +141,16 @@ new CronJob('0 */30 * * * *', function() { // Every 30 min
                 callback(null);
               });
       			},
+            function(callback) { // Upload yesterday stat (GEO)
+
+              var fileName = 'imi_stats_export_geo_yesterday.csv';
+              uploadZoho(dayYesterday, monthYesterday, yearYesterday, fileName, function(check, zoho) {
+                checkYesterdayGeo = check;
+                zohoYesterdayGeo = zoho;
+                callback(null);
+              });
+
+            },
             function(callback) { // Upload yesterday stat
 
               var fileName = 'imi_stats_export_yesterday.csv';
@@ -117,19 +162,21 @@ new CronJob('0 */30 * * * *', function() { // Every 30 min
 
             },
             function(callback) { // Send message
-              if (!checkToday && !checkYesterday) {
+              if (!checkTodayGeo && !checkYesterdayGeo && !checkToday && !checkYesterday) {
                 var options = {
                   reply_markup: JSON.stringify({
                     inline_keyboard: [
+                    [{ text: '💰 ЗА СЕГОДНЯ', url: zohoToday }],
+                    [{ text: '💰 ЗА СЕГОДНЯ (ГЕО)', url: zohoTodayGeo }],
                     [{ text: '💰 ЗА ВЧЕРА', url: zohoYesterday }],
-                    [{ text: '💰 ЗА СЕГОДНЯ', url: zohoToday }]
+                    [{ text: '💰 ЗА ВЧЕРА (ГЕО)', url: zohoYesterdayGeo }]
                     ]
                   })
                 };
                 if (msgID != "") {
                   bot.deleteMessage(chatIdImon, msgID);
                 }
-                bot.sendMessage(chatIdImon, "Статистика:" ,options).then(sender => {
+                bot.sendMessage(chatIdImon, "📈СТАТИСТИКА С МОНЕТЫ:" ,options).then(sender => {
                   msgID = sender.message_id;
                 });
 
@@ -149,7 +196,7 @@ new CronJob('0 */30 * * * *', function() { // Every 30 min
           });
 },
 function() {    
- return (checkToday || checkYesterday); 
+ return (checkToday || checkYesterday || checkYesterdayGeo || checkTodayGeo); 
 },
 function (err, result) {
  console.log('END CYCLE');
