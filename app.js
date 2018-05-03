@@ -287,8 +287,10 @@ function downloadFile(fileName, url, callback1) {
      await browser.close();
      await main();
      function main() {
-      fs.writeFile(fileName, dataGet[0], "binary", function(err, x) {console.log('Wrote file');});
-      callback1(false);
+      fs.writeFile(fileName, dataGet[0], "binary", function(err, x) {
+        console.log('Wrote file');
+        callback1(false);
+      });
     }
   } catch(e) {
     console.log('Error: ' + e);
